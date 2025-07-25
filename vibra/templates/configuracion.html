@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Configuración de cuenta{% endblock %}
+{% block content %}
+  <h1>⚙️ Configuración de Cuenta</h1>
+
+  {% if session.get('es_premium') %}
+    <div class="premium-activo">
+      <p style="color: #8e44ad;">🌟 ¡Ya eres usuario <strong>Premium</strong>!</p>
+
+      <form action="{{ url_for('auth.cancelar_premium') }}" method="post">
+        <button class="cancelar-premium-boton">Cancelar suscripción</button>
+      </form>
+
+    </div>
+  {% else %}
+    <a href="{{ url_for('auth.actualizar_a_premium') }}" class="premium-boton">Hazte Premium ⭐</a>
+  {% endif %}
+
+  <div style="max-width:400px;margin:30px auto;padding:30px 25px;background:#fff;border-radius:15px;box-shadow:0 2px 16px rgba(180,130,255,0.09);">
+    <h3>¿Quieres eliminar tu cuenta?</h3>
+    <p style="color:#a45fff;">Esta acción es irreversible. Perderás todos tus datos y conexiones.</p>
+    <form method="post">
+      <button type="submit" style="background:#f44336;color:white;padding:10px 30px;font-size:1.1em;border-radius:8px;border:none;margin-top:10px;">Eliminar cuenta</button>
+    </form>
+  </div>
+{% endblock %}

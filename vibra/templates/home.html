@@ -1,0 +1,8 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+{% block title %}Bienvenido – VibraApp{% endblock %}
+{% block content %}
+  <h1>Bienvenido a VibraApp</h1>
+  <p>Conecta con personas que vibran como tú.</p>
+  <a href="{{ url_for('match.match') }}"><button>🔮 Conoce almas afines</button></a>
+{% endblock %}

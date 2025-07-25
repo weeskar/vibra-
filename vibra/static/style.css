@@ -1,0 +1,563 @@
+/* --------------------------------
+   GLOBAL
+-------------------------------- */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f4ef;
+  color: #333;
+  text-align: center;
+  padding-top: 0px;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+/* --------------------------------
+   BOTONES COMUNES
+-------------------------------- */
+button {
+  background-color: #c69aff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #a45fff;
+}
+
+.aceptar {
+  background-color: #4CAF50;
+  color: white;
+}
+.rechazar {
+  background-color: #f44336;
+  color: white;
+}
+
+.botones {
+  margin-top: 10px;
+}
+.botones button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.botones button:hover {
+  opacity: 0.8;
+}
+
+/* --------------------------------
+   MENSAJES FLASH
+-------------------------------- */
+.flashes {
+  list-style: none;
+  padding: 0;
+  margin: 1em;
+}
+.flashes li {
+  padding: 0.5em;
+  border-radius: 4px;
+  margin-bottom: 0.5em;
+}
+.flashes li.error {
+  background: #ffdddd;
+  color: #900;
+}
+.flashes li.success {
+  background: #ddffdd;
+  color: #090;
+}
+
+/* --------------------------------
+   NAVBAR
+-------------------------------- */
+.navbar {
+  background: #fff;
+  border-bottom: 1.5px solid #c69aff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 30px;
+  box-shadow: 0 2px 12px rgba(180,130,255,0.06);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo-navbar {
+  height: 36px;
+  transform: scale(2.0);
+  transform-origin: left center;
+  margin-left: -25px;
+  margin-right: 0;
+  cursor: pointer;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
+
+.navbar-right a {
+  color: #54436b;
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 24px;
+  font-size: 1.05em;
+  transition: color 0.2s;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.navbar-right a:hover {
+  color: #fff;
+  background: #b993fd;
+  box-shadow: 0 2px 8px rgba(180,130,255,0.05);
+}
+
+/* --------------------------------
+   MENÚ DESPLEGABLE: Herramientas
+-------------------------------- */
+.navbar-tools-menu {
+  position: relative;
+  display: inline-block;
+  margin-left: 24px;
+}
+
+.tools-button {
+  background: #e6d9ff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #6742c2;
+  transition: background 0.2s;
+}
+
+.tools-button:hover {
+  background: #ceb8ff;
+}
+
+.tools-menu {
+  position: absolute;
+  left: 0;
+  background: #fffdfc;
+  border: 1px solid #e3d3f9;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(144, 110, 190, 0.15);
+  margin-top: 8px;
+  width: 250px;
+  z-index: 1002;
+  font-family: 'Arial', sans-serif;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tools-menu a {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: inherit;
+}
+.tools-menu a .icono-texto {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  font-size: 0.95em;
+  color: #5e437e;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  border-bottom: 1px solid #f3e8ff;
+  gap: 10px;
+}
+
+
+
+.grupo-menu {
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 6px 16px 2px 16px;
+  color: #8f00ff;
+
+}
+
+
+
+/* --------------------------------
+   MENÚ DESPLEGABLE: Usuario
+-------------------------------- */
+.navbar-user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.user-button {
+  background: #e6d9ff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #6742c2;
+  transition: background 0.2s;
+}
+
+.user-button:hover {
+  background: #d3bcff;
+}
+
+.user-menu {
+  position: absolute;
+  right: 0;
+  background: #fffdfc;
+  border: 1px solid #e3d3f9;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(144, 110, 190, 0.15);
+  margin-top: 8px;
+  width: 220px;
+  z-index: 1002;
+  font-family: 'Arial', sans-serif;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0;
+}
+
+.user-menu a {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.icono-texto {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  font-size: 0.95em;
+  color: #5e437e;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  border-bottom: 1px solid #f3e8ff;
+  gap: 10px;
+}
+
+
+
+.hidden {
+  display: none;
+}
+/* --------------------------------
+   REGISTRO
+-------------------------------- */
+.registro-contenedor {
+  max-width: 420px;
+  margin: 40px auto 0 auto;
+  padding: 2em 2.5em;
+  background: #fff9f3;
+  border-radius: 16px;
+  box-shadow: 0 6px 32px 0 #0001;
+  text-align: center;
+}
+.registro-contenedor h1 {
+  margin-bottom: 24px;
+  color: #8f00ff;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.registro-form .campo {
+  margin-bottom: 20px;
+  text-align: left;
+}
+.registro-form label {
+  display: block;
+  margin-bottom: 6px;
+  color: #574362;
+  font-weight: 600;
+  font-size: 1.03em;
+}
+.registro-form input[type="text"],
+.registro-form input[type="email"],
+.registro-form input[type="password"],
+.registro-form input[type="date"] {
+  width: 100%;
+  padding: 10px 8px;
+  border-radius: 8px;
+  border: 1px solid #d6c1f0;
+  background: #faf7ff;
+  margin-bottom: 2px;
+  font-size: 1.05em;
+}
+.boton-principal {
+  background-color: #8f00ff;
+  color: #fff;
+  padding: 12px 0;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+.boton-principal:hover {
+  background-color: #a45fff;
+}
+.registro-login-link {
+  margin-top: 25px;
+  color: #7c6a9c;
+}
+.registro-login-link a {
+  color: #8f00ff;
+  text-decoration: underline;
+}
+
+/* --------------------------------
+   PERFIL
+-------------------------------- */
+.form-perfil {
+  max-width: 400px;
+  margin: 40px auto;
+  background: #fff7fc;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px 0 #eee;
+  padding: 32px 30px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form-perfil h1 {
+  color: #7e42a4;
+  margin-bottom: 16px;
+}
+.form-perfil label {
+  margin-top: 10px;
+  color: #4c3c77;
+  font-weight: 500;
+  align-self: flex-start;
+}
+.form-perfil input[type="text"],
+.form-perfil input[type="number"],
+.form-perfil input[type="date"],
+.form-perfil textarea,
+.form-perfil select {
+  width: 100%;
+  padding: 7px 10px;
+  margin: 4px 0 8px 0;
+  border-radius: 7px;
+  border: 1px solid #d1b3fa;
+  background: #fcfaff;
+}
+.form-perfil textarea {
+  resize: vertical;
+}
+.form-perfil button {
+  margin-top: 16px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-perfil img {
+  border-radius: 16px;
+  margin-bottom: 12px;
+  margin-top: 10px;
+  box-shadow: 0 1px 4px #aaa6;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  background: #eee;
+}
+
+/* --------------------------------
+   PERFIL PÚBLICO
+-------------------------------- */
+.perfil-publico-contenedor {
+  max-width: 430px;
+  margin: 45px auto;
+  background: #fff9f3;
+  border-radius: 18px;
+  box-shadow: 0 2px 18px 0 #d1c3fc66;
+  padding: 38px 32px;
+  text-align: center;
+}
+.perfil-publico-contenedor img {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  object-fit: cover;
+  background: #eee;
+  box-shadow: 0 2px 10px #a087fc3a;
+  margin-bottom: 12px;
+}
+.boton-ver-perfil, .boton-previsualizar {
+  background: #8f00ff;
+  color: #fff;
+  padding: 7px 16px;
+  border-radius: 7px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.boton-ver-perfil:hover, .boton-previsualizar:hover {
+  background: #a45fff;
+}
+.nombre-premium {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.perfil-imagen-con-premium {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.icono-premium {
+  width: 18px;
+  height: 18px;
+  transform: scale(0.4); 
+  object-fit: contain;
+  filter: drop-shadow(0 0 2px #ffd700);
+  margin-top: 2px;
+}
+/* --------------------------------
+   CONFIGURACION DE CUENTA
+-------------------------------- */
+.premium-boton {
+  display: inline-block;
+  background: linear-gradient(to right, #9c27b0, #ff9800);
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 20px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: background 0.3s ease;
+}
+.premium-boton:hover {
+  background: linear-gradient(to right, #ab47bc, #ffa726);
+}
+.premium-activo {
+  background: #f3e5f5;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 20px auto;
+  max-width: 400px;
+  font-weight: bold;
+}
+
+.cancelar-premium-boton {
+  background: #ddd;
+  color: #333;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.cancelar-premium-boton:hover {
+  background: #bbb;
+}
+/* --------------------------------
+   MEDIA QUERIES
+-------------------------------- */
+@media (max-width: 500px) {
+  .form-perfil {
+    padding: 18px 4vw;
+  }
+}
+/* --------------------------------
+        TEST CHAKRAS
+-------------------------------- */
+body.fondo-estrellas {
+  background-image: url("/static/images/fondo_estrellas.jpg"); /* Cambia la ruta si está en otro sitio */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #000; /* Color base por si no carga la imagen */
+}
+
+.fondo-estrellas {
+  background-image: url("/static/img/fondo-estrellas.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.bloque-pregunta {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.texto-pregunta {
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 1.05em;
+  color: #4b0082;
+}
+
+.opcion-pregunta {
+  display: block;
+  margin: 5px 0;
+  font-size: 0.95em;
+}
+.chakra-test-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+  font-size: 0.95em;
+  color: #444;
+}
+
+.boton-test-chakra {
+  background-color: #b988cc;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.boton-test-chakra:hover {
+  background-color: #cf7bf0;
+}

@@ -1,0 +1,85 @@
+<!-- templates/perfil.html -->
+{% extends "base.html" %}
+{% block title %}Editar Perfil – VibraApp{% endblock %}
+{% block content %}
+  <form class="form-perfil" action="" method="post" enctype="multipart/form-data">
+    <a href="{{ url_for('perfil.ver_perfil_usuario', perfil_id=usuario.perfil.id) }}" class="boton-previsualizar">👁️ Previsualizar mi perfil</a>
+    <h1>Editar Perfil</h1>
+    {% if usuario.perfil.avatar %}
+      <img src="{{ url_for('static',filename='uploads/'+usuario.perfil.avatar) }}" alt="Avatar">
+    {% endif %}
+
+    <label>Nombre:</label>
+    <input type="text" name="nombre" value="{{ usuario.nombre }}" readonly>
+
+    <label>Fecha de nacimiento:</label>
+    <input type="date" name="fecha_nacimiento" value="{{ usuario.perfil.fecha_nacimiento }}" readonly>
+
+    <label>Edad:</label>
+    <input type="number" name="edad" value="{{ usuario.perfil.edad }}" readonly>
+
+    <label>Frase espiritual favorita:</label>
+    <input type="text" name="frase_favorita" value="{{ usuario.perfil.frase_favorita or '' }}" placeholder="Ej: Soy luz y paz">
+
+    <label>Chakra predominante:</label>
+
+    {% if usuario.perfil.chakra %}
+      <select name="chakra">
+        <option value="">Selecciona…</option>
+        <option value="raiz" {% if usuario.perfil.chakra == "raiz" %}selected{% endif %}>Raíz</option>
+        <option value="sacro" {% if usuario.perfil.chakra == "sacro" %}selected{% endif %}>Sacro</option>
+        <option value="plexo" {% if usuario.perfil.chakra == "plexo" %}selected{% endif %}>Plexo solar</option>
+        <option value="corazon" {% if usuario.perfil.chakra == "corazon" %}selected{% endif %}>Corazón</option>
+        <option value="garganta" {% if usuario.perfil.chakra == "garganta" %}selected{% endif %}>Garganta</option>
+        <option value="tercer_ojo" {% if usuario.perfil.chakra == "tercer_ojo" %}selected{% endif %}>Tercer Ojo</option>
+        <option value="corona" {% if usuario.perfil.chakra == "corona" %}selected{% endif %}>Corona</option>
+      </select>
+      {% else %}
+        <div class="chakra-test-info">
+          <span>Aún no has realizado tu test de chakra.</span>
+          <a href="{{ url_for('chakra.chakra_test_intro') }}" class="boton-test-chakra">✨ Hacer el test</a>
+        </div>
+      {% endif %}
+
+    <label>País:</label>
+    <select name="pais" id="pais" onchange="this.form.submit()">
+      {% for pais in paises %}
+        <option value="{{ pais }}" {% if usuario.perfil.pais == pais %}selected{% endif %}>{{ pais }}</option>
+      {% endfor %}
+    </select>
+    <label>Ciudad:</label>
+    <input type="text" name="ciudad" value="{{ usuario.perfil.ciudad }}" readonly>
+
+    <label>Provincia:</label>
+    <input type="text" name="provincia" value="{{ usuario.perfil.provincia }}" readonly>
+
+    <label>Código Postal:</label>
+    <input type="text" name="codigo_postal" value="{{ usuario.perfil.codigo_postal }}">
+    <label>Idioma:</label>
+    <select name="idioma">
+      {% for idioma in idiomas %}
+        <option value="{{ idioma }}" {% if usuario.perfil.idioma == idioma %}selected{% endif %}>{{ idioma }}</option>
+      {% endfor %}
+    </select>
+    <label>Género:</label>
+    <select name="genero">
+      <option value="hombre" {% if usuario.perfil.genero == "hombre" %}selected{% endif %}>Hombre</option>
+      <option value="mujer" {% if usuario.perfil.genero == "mujer" %}selected{% endif %}>Mujer</option>
+      <option value="otro" {% if usuario.perfil.genero == "otro" %}selected{% endif %}>Otro</option>
+    </select>
+    <label>Orientación:</label>
+    <select name="orientacion">
+      <option value="heterosexual" {% if usuario.perfil.orientacion == "heterosexual" %}selected{% endif %}>Heterosexual</option>
+      <option value="homosexual" {% if usuario.perfil.orientacion == "homosexual" %}selected{% endif %}>Homosexual</option>
+      <option value="bisexual" {% if usuario.perfil.orientacion == "bisexual" %}selected{% endif %}>Bisexual</option>
+      <option value="all" {% if usuario.perfil.orientacion == "all" %}selected{% endif %}>Sin preferencia</option>
+    </select>
+    <label>Biografía:</label>
+    <textarea name="bio" rows="3">{{ usuario.perfil.bio }}</textarea>
+    <label>Intereses (comas):</label>
+    <input name="intereses" value="{{ usuario.perfil.intereses }}">
+    <label>Avatar:</label>
+    <input type="file" name="avatar">
+    <button type="submit">Guardar cambios</button>
+  </form>
+{% endblock %}

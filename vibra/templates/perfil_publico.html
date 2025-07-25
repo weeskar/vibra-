@@ -1,0 +1,58 @@
+<!-- templates/perfil_publico.html -->
+{% extends "base.html" %}
+{% block title %}Perfil de {{ usuario.nombre }} – VibraApp{% endblock %}
+{% block content %}
+<div class="perfil-publico-contenedor">
+    <h2 class="nombre-premium">
+        {{ usuario.nombre }}, {{ perfil.edad }}
+    </h2>
+
+    <div class="perfil-imagen-con-premium">
+        <div class="perfil-avatar">
+        {% if perfil.avatar %}
+            <img src="{{ url_for('static', filename='uploads/' + perfil.avatar) }}" alt="Avatar de {{ usuario.nombre }}">
+        {% else %}
+            <img src="{{ url_for('static', filename='default_avatar.png') }}" alt="Avatar por defecto">
+        {% endif %}
+        </div>
+
+        {% if usuario.es_premium %}
+        <div class="premium-insignia">
+            <img src="{{ url_for('static', filename='icons/icono-premium.png') }}"
+                alt="Premium"
+                title="Usuario Premium">
+        </div>
+        {% endif %}
+    </div>
+    <p><b>Signo Zodiacal:</b> {{ perfil.signo }}</p>
+    <p><b>{{ perfil.ciudad }}, {{ perfil.pais }}</b></p>
+    <p><i>{{ perfil.bio }}</i></p>
+    <p><b>Intereses:</b> {{ perfil.intereses }}</p>
+    <p><b>Idioma:</b> {{ perfil.idioma }}</p>
+    <p><b>Género:</b> {{ perfil.genero }}</p>
+    <p><b>Orientación:</b> {{ perfil.orientacion }}</p>
+    {% if not soy_yo %}
+        {% if match_mutuo %}
+            <p style="color:#4caf50;"><strong>✨ ¡Match mutuo!</strong></p>
+            <form method="post" action="{{ url_for('match.rechazar', perfil_id=usuario.id) }}">
+                <button class="rechazar">Eliminar match</button>
+            </form>
+        {% elif like_ya_dado %}
+            <p style="color:#aaa;">(Has enviado una solicitud de conexión)</p>
+            <form method="post" action="{{ url_for('match.rechazar', perfil_id=usuario.id) }}">
+                <button class="rechazar">Cancelar</button>
+            </form>
+        {% else %}
+            <form method="post" action="{{ url_for('match.conectar', perfil_id=usuario.id) }}">
+                <button class="aceptar">Conectar</button>
+            </form>
+            <form method="post" action="{{ url_for('match.rechazar', perfil_id=usuario.id) }}">
+                <button class="rechazar">Rechazar</button>
+            </form>
+        {% endif %}
+    {% else %}
+        <p style="color: #8f00ff;">(Esta es la vista pública de tu perfil)</p>
+    {% endif %}
+    <a href="{{ url_for('match.match') }}">← Volver a Match</a>
+</div>
+{% endblock %}

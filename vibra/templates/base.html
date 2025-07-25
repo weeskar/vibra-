@@ -1,0 +1,121 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}VibraApp{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+<nav class="navbar">
+  <div class="navbar-left">
+    <a href="{{ url_for('home.home') }}">
+      <img src="{{ url_for('static', filename='logo/logo-vibra.png') }}" alt="Vibra" class="logo-navbar">
+    </a>
+
+  </div>
+  <div class="navbar-right">
+    {% if session.get('usuario_id') %}
+    
+  <div class="navbar-tools-menu">
+    <button id="tools-toggle" class="tools-button">Herramientas</button>
+    <div id="tools-menu" class="tools-menu hidden">
+      
+      <strong class="grupo-menu"> Espirituales</strong>
+      <a href="{{ url_for('chakra.chakra_test_intro') }}">
+        <span class="icono-texto">🔮 Test de Chakra</span>
+      </a>
+      <a href="#">
+        <span class="icono-texto">🃏 Tirada de Tarot</span>
+      </a>
+      <a href="#">
+        <span class="icono-texto">✨ Compatibilidad Energética</span>
+      </a>
+
+      <strong class="grupo-menu"> Holísticas</strong>
+      <a href="#">
+        <span class="icono-texto">🧘‍♂️ Meditaciones</span>
+      </a>
+      <a href="#">
+        <span class="icono-texto">📓 Diario Espiritual</span>
+      </a>
+      <a href="#">
+        <span class="icono-texto">🔥 Ritual del día</span>
+      </a>
+
+    </div>
+  </div> 
+    
+    <div class="navbar-user-menu">
+        <button id="menu-toggle" class="user-button">{{ session.get('usuario_nombre') }}</button>
+        <div id="user-menu" class="user-menu hidden">
+          <a href="{{ url_for('perfil.ver_perfil_usuario', perfil_id=session.get('usuario_id')) }}">
+            <span class="icono-texto">👁️ Ver perfil</span>
+          </a>
+          <a href="{{ url_for('perfil.perfil') }}">
+            <span class="icono-texto">✏️ Editar perfil</span>
+          </a>
+          <a href="{{ url_for('match.mis_matches') }}">
+            <span class="icono-texto">💞 Mis matches</span>
+          </a>
+          <a href="#">
+            <span class="icono-texto">🔔 Notificaciones</span>
+          </a>
+          <a href="{{ url_for('auth.logout') }}">
+            <span class="icono-texto">🚪 Cerrar sesión</span>
+
+          </a>
+        </div>
+      
+      </div>
+      <a href="{{ url_for('config.configuracion') }}" title="Configuración"><span style="font-size:1.2em;">⚙️</span></a>
+    {% else %}
+      <a href="{{ url_for('auth.registro') }}">Registrarse</a>
+      <a href="{{ url_for('auth.login') }}">Iniciar sesión</a>
+    {% endif %}
+  </div>
+</nav>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for category, msg in messages %}
+          <li class="{{ category }}">{{ msg }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <main style="padding: 80px 20px 20px;">
+    {% block content %}{% endblock %}
+  </main>
+<script>
+  const toggleTools = document.getElementById("tools-toggle");
+  const toolsMenu = document.getElementById("tools-menu");
+
+  toggleTools.addEventListener("click", () => {
+    toolsMenu.classList.toggle("hidden");
+  });
+
+  window.addEventListener("click", function (e) {
+    if (!toggleTools.contains(e.target) && !toolsMenu.contains(e.target)) {
+      toolsMenu.classList.add("hidden");
+    }
+  });
+</script>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("user-menu");
+
+  toggle.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+
+  window.addEventListener("click", function (e) {
+    if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.add("hidden");
+    }
+  });
+</script>
+
+</body>
+</html>

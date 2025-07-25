@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Paso {{ paso }} – Test de Chakra{% endblock %}
+{% block body_class %}fondo-estrellas{% endblock %}
+{% block content %}
+
+<div class="form-perfil fondo-estrellas">
+
+  <h2>{{ datos.color }} {{ datos.nombre }}</h2>
+  <p style="font-size: 0.9em; color: #666;">{{ datos.descripcion }}</p>
+
+  <!-- Barra de progreso -->
+  <div style="width: 100%; background: #eee; border-radius: 10px; margin: 20px 0;">
+    <div style="width: {{ (paso / total * 100)|round(0) }}%; background: #8f00ff; padding: 6px 0; border-radius: 10px; color: white; font-weight: bold;">
+      Paso {{ paso }} de {{ total }}
+    </div>
+  </div>
+
+<form method="post">
+  {% for pregunta in datos.preguntas %}
+    <div class="bloque-pregunta">
+      <p class="texto-pregunta">🟣 {{ pregunta.texto }}</p>
+      {% set idx = loop.index0 %}
+      {% for opcion, valor in pregunta.opciones %}
+        <label class="opcion-pregunta">
+          <input type="radio" name="p{{ idx }}" value="{{ valor }}" required>
+          {{ opcion }}
+        </label>
+      {% endfor %}
+    </div>
+  {% endfor %}
+  <button type="submit" class="boton-principal">Siguiente</button>
+</form>
+
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+<!-- templates/mis_matches.html -->
+{% extends "base.html" %}
+{% block title %}Tus Conexiones – VibraApp{% endblock %}
+{% block content %}
+  <h1>💜 Conexiones Mutuas</h1>
+  <p>Personas con las que tienes un match espiritual mutuo.</p>
+  {% if matches %}
+    <div class="perfiles">
+      {% for m in matches %}
+      <div class="perfil">
+        <img src="{{ url_for('static', filename='uploads/' ~ m.avatar) if m.avatar else url_for('static', filename='default_avatar.png') }}" alt="{{ m.nombre }}">
+        <h3>{{ m.nombre }}, {{ m.edad }}</h3>
+        <p>{{ m.bio }}</p>
+        <a href="{{ url_for('perfil.ver_perfil_usuario', perfil_id=m.id) }}" class="ver-perfil-btn">Ver perfil</a>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No tienes matches aún. ¡Sigue conectando con almas afines! ✨</p>
+  {% endif %}
+{% endblock %}

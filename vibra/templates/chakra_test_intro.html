@@ -1,0 +1,24 @@
+<!-- templates/chakra_test_intro.html -->
+{% extends "base.html" %}
+{% block title %}Test de Chakra – VibraApp{% endblock %}
+{% block body_class %}fondo-estrellas{% endblock %}
+{% block content %}
+<div class="form-perfil">
+  <h1>🌈 Test de Chakra</h1>
+
+  <p style="font-size: 0.96em; color: #666; margin-bottom: 20px;">
+    Este test espiritual te ayudará a descubrir cuál de tus chakras está más activo en este momento.
+    Los chakras son centros energéticos que influyen en tu cuerpo, emociones, mente y alma.
+  </p>
+
+  <p style="text-align: left; font-size: 0.95em;">
+    ✅ Responde con sinceridad.<br>
+    ✅ Hay 7 secciones breves (una por chakra).<br>
+    ✅ Al finalizar sabrás cuál es tu chakra predominante y qué significa.
+  </p>
+
+  <a href="{{ url_for('chakra.chakra_test_paso', paso=1) }}" class="boton-principal" style="margin-top: 25px;">
+    Comenzar el test
+  </a>
+</div>
+{% endblock %}
